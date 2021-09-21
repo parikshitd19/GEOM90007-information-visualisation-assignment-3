@@ -16,5 +16,7 @@ Zhening Wange (Student ID: )
 ## Project structure
 
 doc/ -- Documentation and implementation notes
+
 playground/ -- Miscellaneous code 
+
 web/ -- Source code for the front-end web-based visualization
