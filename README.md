@@ -15,8 +15,6 @@ Zhening Wange (Student ID: )
 
 ## Project structure
 
-constants/ -- Files contaning the constants for various parts of the project
-data/ -- Dataset and scripts for processing of data
 doc/ -- Documentation and implementation notes
 playground/ -- Miscellaneous code 
 web/ -- Source code for the front-end web-based visualization
