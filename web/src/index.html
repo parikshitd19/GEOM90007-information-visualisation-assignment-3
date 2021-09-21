@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="parent-container">
+
+        <div class="header">
+            <h1>Environmental Explorations in Melbourne</h1>
+        </div>
+
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="map-overlay" id="title">
+                <h2> Melbourne </h2>
+            </div>
+            <div class="button-container">
+                <nav class="button" id="total-button"></nav>
+            </div>
+            <nav class="button" id="order-button"></nav>
+            <div class="map-overlay" id="legend"></div>
+        </div>
+
+
+        <div class="row">
+            <div class="column">
+                <canvas class="chart" id="chart1" style="width:100%;height:100%;"> </canvas>
+            </div>
+            <div class="column">
+                <canvas class="chart" id="chart2" style="width:100%;height:100%;"</canvas>
+            </div>
+        </div>
+</body>
+</html>
