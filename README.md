@@ -11,7 +11,7 @@ Colin McLean (Student ID: 1139518)
 
 Parikshit Diwan (Student ID: 1110497)
 
-Zhening Wange (Student ID: )
+Zhening Wang (Student ID: 1227303)
 
 ## Project structure
 
