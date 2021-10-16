@@ -21,17 +21,53 @@ var chart = new Chart(ctx, {
     datasets: [{
       label: 'Recycle Collected',
       data: recycleCollectedData,
-      borderWidth: 1,
-      fill:{
-        target: 1,
-        above: 'rgb(255, 0, 0)',   // Area will be red above the origin
-        below: 'rgb(0, 0, 255)' 
-      }
+      borderWidth: 3,
+      borderColor:'rgb(0, 0, 255)',
+      backgroundColor:'rgb(0, 0, 255)'
     },{
       label: 'Recycle Processed',
       data: recycleProcessedData,
-      borderWidth: 1
+      borderWidth: 3,
+      borderColor:'rgb(0, 255, 0)',
+      backgroundColor:'rgb(0, 255, 0)',
+      fill: {
+        target: '-1',
+        above: 'rgb(255, 255, 0)',   // Area will be red above the origin
+        below: 'rgb(255, 0, 0)'    // And blue below the origin
+      }
     }]
   },
-  options: {}
+  options: {
+    plugins: {
+      legend: {
+          position:'right',
+        labels: {
+          usePointStyle: true,
+        },
+      }
+    },
+    scales: {
+        yAxes: {
+            title: {
+                display: true,
+                text: "Weight(in tonnes)",
+                font: {
+                    size: 15
+                }
+            },
+            ticks: {
+                precision: 0
+            }
+        },
+        xAxes: {
+            title: {
+                display: true,
+                text: 'Reference Year',
+                font: {
+                    size: 15
+                }
+            }
+        }
+    }
+  }
 });
