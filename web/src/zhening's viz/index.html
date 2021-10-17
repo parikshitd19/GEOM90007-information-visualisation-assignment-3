@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Management Facilities</title>
+
+    <!-- Load CSS files, a Bootstrap CSS file and a CSS file created from scratch -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Load Mapbox files -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
+        rel="stylesheet">
+
+    <!-- Load Chart JS files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js"
+        integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+<body>
+    <div class="container-fluid min-vh-100">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="text-center">Greenhouse Gas Emissions in Melbourne</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="polarFilter">
+                    <p id="emissionSelect">Select a year:</p>
+                    <select id="emissionType">
+                        <option value="310038, 262376, 247421, 389055, 98673">2020</option>
+                        <option value="284576, 276303, 220975, 570176, 75400">2019</option>
+                        <option value="278212, 256112, 187021, 534450, 76344">2018</option>
+                        <option value="266707, 262254, 192343, 498407, 71001">2017</option>
+                        <option value="179003, 257854, 439645, 466982, 299083">2016</option>
+                        <option value="179003, 264951, 451745, 466982, 235388">2015</option>
+                        <option value="152336, 288606, 397489, 440950, 193397">2014</option>
+                        <option value="147446, 279688, 409532, 440949, 208264">2013</option>
+                    </select>
+                </div>
+                <div id="polarArea">
+                    <canvas id="emissionPolarAreaChart" style="height: 700px;"></canvas>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    <!-- Load Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+
+    <!-- Load visualisations-->
+    <script src="polarAreaChart.js"></script>
+
+
+</body>
+
+</html>
