@@ -1,6 +1,6 @@
-# GEOM90007-information-visualisation-assignment-3
+# GEOM90007-information-visualisation-project
 
-This repository contains the source code for assignment 3 of the GEOM90007 Information Visualisation course at the University of Melbourne.
+This repository contains the source code for project of the GEOM90007 Information Visualisation course at the University of Melbourne.
 
 Submission Details
 
