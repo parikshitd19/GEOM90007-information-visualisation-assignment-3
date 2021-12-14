@@ -15,7 +15,4 @@ Zhening Wang (Student ID: 1227303)
 
 ## Project structure
 
-doc/ -- Documentation and implementation notes
-
-
-web/ -- Source code for the front-end web-based visualization
+assets/ -- Javascript and Data files
