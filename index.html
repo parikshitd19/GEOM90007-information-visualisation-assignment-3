@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>InfoVizA3</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/styles.css">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
+</head>
+
+<body>
+    <div style="min-height: 50px;padding: 0px;border-style: none;border-bottom-width: 5px;background: linear-gradient(to bottom, rgba(102,138,104,.8) 0%, rgba(102,138,104,0.89375) 75%, rgba(102,138,104,.9) 80%);background-size: cover;margin: 0px;margin-right: 20px;margin-left: 30px;margin-top: 10px;border-radius: 10px;">
+        <h1 style="margin: 0px;height: 150px;padding-top: 20px;padding-bottom: 20px;background: rgba(0, 109, 44, 0.4);padding-left: 0px;margin-right: 0px;margin-left: 0px;border-radius: 10px;">    <span id = "heading-title">Environmental Explorations in Metro-Melbourne<br> </span>
+    <span id = "sub-title"> Waste Management | Energy Consumption | Greenhouse Gas Emissions </span>
+</h1>
+    </div>
+    <div class="row" style="padding-right: 20px;padding-left: 20px;padding-top: 20px;border-bottom: 2px solid #d3d3d3;padding-bottom: 20px;margin-right: 20px;margin-left: 20px;">
+        <div class="col" style="border-radius: 1px;border-right-style: solid;border-right-color: #d3d3d3;">
+            <p style="border-right-color: rgba(102,138,104,0.894);color: rgba(35, 31, 32, 0.7);text-align: center;font-size: 54px;height: 80px;padding-top: 0px;">268kg</p>
+            <p style="border-right-color: rgba(102,138,104,0.894);color: rgba(35, 31, 32, 0.7);text-align: center;font-size: 24px;height: 100px;padding-top: 0px;margin-top: -26px;padding-bottom: 0px;margin-bottom: 0px;">of waste produced in the average household</p>
+        </div>
+        <div class="col" style="border-radius: 1px;border-right: 2px solid #d3d3d3 ;">
+            <p style="font-size: 48px;text-align: center;height: 52px;color: rgba(35, 31, 32, 0.7);border-right-color: rgba(102, 138, 104, 0.894);padding: 0px;margin-top: 0px;">Residential</p>
+            <p style="text-align: center;font-size: 24px;color: rgba(35, 31, 32, 0.7);margin-top: 17px;">produces the most waste</p>
+        </div>
+        <div class="col" style="border-right: 2px solid #d3d3d3;margin-right: 0px;"><canvas class="chart" id="pie_chart" style="width:100%;max-height:150px;"> </canvas></div>
+        <div class="col" style="border-right-style: solid;border-right-color: #d3d3d3;border-radius: 1px;">
+            <p style="font-size: 36px;text-align: center;color: rgba(35, 31, 32, 0.7);margin-top: 21px;">8,931 kWh</p>
+            <p style="color: rgba(35, 31, 32, 0.7);font-size: 24px;text-align: center;margin-top: -16px;">of energy consumed per capita</p>
+        </div>
+        <div class="col">
+            <p style="font-size: 36px;text-align: center;color: rgba(35, 31, 32, 0.7);margin-top: 21px;">Transportation</p>
+            <p style="color: rgba(35, 31, 32, 0.7);font-size: 24px;text-align: center;margin-top: -16px;">emits the most greenhouse gasses</p>
+        </div>
+    </div>
+    <div class="row" style="padding: 17px15px;border-bottom: 2px solid #d3d3d3;border-radius: 1px;padding-top: 0px;padding-bottom: 30px;padding-right: 0;padding-left: 0;margin-right: 20px;margin-left: 20px;height: 650px;margin-bottom: 20px;margin-top: 20px;">
+        <div class="col-6" style="border-radius: 1px;padding-top: 0;padding-left: 0;margin-bottom: 0px;padding-bottom: 0x;padding-right: 0px;border-right: 2px none #d3d3d3;border-left-width: 2px;border-left-color: #d3d3d3;"><div class="row" id="overview-map-title-box">
+    <div class="col">
+        <p id="overview-map-title">Resources used in Metro Melbourne by LGA</p>
+    </div>
+</div>
+
+<div class="map-container">
+    <div id="map"></div>
+    <nav class="button" id="choropleth-button"></nav>
+    <div class="map-overlay" id="legend"></div>
+</div></div>
+        <div class="col-6" style="padding-left: 40px;padding-bottom: 0px;padding-top: 0px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;border-right-style: none;border-left: 2px solid #d3d3d3;border-radius: 1px;">
+            <div id="waste-chart-container"><div class="row" id="wasteSelecterBox">
+    <div class="col">
+        <p id="wasteSelectTitle">Select Waste Type:</p>
+    </div>
+    <div class="col">
+        <select id="wasteSelecter">
+            <option value="181.44, 182.65, 196.78, 185.87, 188.76, 168.31, 196.51, 203.20, 202.12, 69.30, 72.42, 66.46">Cardboard</option>
+            <option value="429.20, 534.51, 535.34, 495.42, 527.64, 552.64, 615.55, 687.32, 755.92, 924.07, 749.62, 872.40">Commingled Recycling</option>
+            <option value="149.02, 141.34, 149.08, 159.06, 124.82, 140.19, 179.97, 165.01, 147.10, 151.25, 122.15, 99.44">Dumped Rubbish</option>
+            <option value="2.88, 3.84, 3.94, 3.79, 4.06, 3.99, 3.67, 4.16, 8.87, 9.39, 8.51, 10.78">Green Waste</option>
+            <option value="14.82, 22.86, 27.56, 32.24, 42.86, 68.5, 83.24, 41.73, 56.01, 66.55, 74.50, 99.50">Hardwaste to Landfill</option>
+            <option value="0, 0, 0, 0, 0, 0, 11.93, 20.85, 14.79, 16.48, 28.37, 32.61">Hardwaste Recovered</option>
+            <option value="21, 138, 201, 220.5, 156, 197.5, 306.5, 265, 380, 446.5, 471, 577">Mattresses</option>
+            <option value="389.32, 372.14, 325.50, 335.43, 385.65, 397.07, 340.44, 316.80, 295.28, 230.95, 287.55, 257.94">Public Litter Bins</option>
+            <option value="1405.98, 1569.80, 1622.83, 1645.55, 1754.82, 1896.27, 1946.72, 2140.86, 2331.68, 2466.53, 2734.50, 2608.78" selected>Residential</option>
+            <option value="605.42, 494.12, 149.30, 426.28, 425.96, 377.23, 358.64, 298.95, 323.49, 310.51, 303.06, 99.44">Street Sweepings</option>
+        </select>
+    </div>
+</div>
+<div id = "wasteBarChartContainer">
+    <canvas id="wasteBarChart"></canvas>
+</div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 0px;padding-bottom: 20px;margin-top: 20px;margin-bottom: 0px;border-radius: 0px;padding-right: 20px;padding-left: 20px;border-width: 0px;border-bottom: 2px solid #d3d3d3;">
+        <div class="col" style="border-radius: 1px;border-right: 2px solid #d3d3d3 ;border-left-style: none;"><div  id="finalChartContainer">
+    <canvas id="finalChart"></canvas>
+</div></div>
+        <div class="col" style="border-left-style: none;"><div class="row" id="recyclingSelecterBox">
+    <div class="col">
+        <p id="recyclingSelectTitle">Select a LGA:</p>
+    </div>
+    <div class="col">
+        <select class="form-select" id="city" onchange="changeChart()">
+            <option value="Banyule">Banyule</option>
+            <option value="Bayside">Bayside</option>
+            <option value="Boroondara">Boroondara</option>
+            <option value="Brimbank">Brimbank</option>
+            <option value="Cardinia">Cardinia</option>
+            <option value="Casey">Casey</option>
+            <option value="Darebin">Darebin</option>
+            <option value="Frankston">Frankston</option>
+            <option value="Glen Eira">Glen Eira</option>
+            <option value="Greater Dandenong">Greater Dandenong</option> 
+            <option value="Hobsons Bay">Hobsons Bay</option>
+            <option value="Hume">Hume</option>
+            <option value="Kingston">Kingston</option>
+            <option value="Knox">Knox</option>
+            <option value="Manningham">Manningham</option>
+            <option value="Maribyrnong">Maribyrnong</option>
+            <option value="Maroondah">Maroondah</option>
+            <option selected value="Melbourne">Melbourne</option>
+            <option value="Melton">Melton</option>
+            <option value="Monash">Monash</option>
+            <option value="Moonee Valley">Moonee Valley</option>
+            <option value="Moreland">Moreland</option>
+            <option value="Mornington Peninsula">Mornington Peninsula</option>
+            <option value="Nillumbik">Nillumbik</option>
+            <option value="Port Phillip">Port Phillip</option>
+            <option value="Stonnington">Stonnington</option>
+            <option value="Whitehorse">Whitehorse</option>
+            <option value="Whittlesea">Whittlesea</option>
+            <option value="Wyndham">Wyndham</option>
+            <option value="Yarra">Yarra</option>
+            <option value="Yarra Ranges">Yarra Ranges</option>
+        </select>
+    </div>
+</div>
+
+<div  id="timeSeriesContainer">
+    <canvas id="timeSeriesChart"></canvas>
+</div></div>
+    </div>
+    <div class="row" style="margin-right: 20px;margin-left: 20px;">
+        <div class="col-6" style="margin-left: 0px;padding-left: 20px;margin-top: 20px;margin-right: 0px;padding-right: 20px;"><div class="energy-map-container">
+    <div id="energyMap"></div>
+    <div class="energy-map-overlay" id="energyTitle">
+        <h2>Energy Consumption (2021) Residential vs Commercial</h2>
+    </div>
+    <nav class="button" id="energy-choropleth-button"></nav>
+    <div class="energy-map-overlay" id="energyLegend"></div>
+</div></div>
+        <div class="col-6" style="padding-right: 20px;border-radius: 1px;padding-top: 0px;padding-bottom: 0px;margin-top: 20px;margin-bottom: 20px;border-left: 2px solid #d3d3d3;"><div class="row" id="polarSelecterBox">
+    <div class="col">
+        <p id="emissionSelect">Select Year:</p>
+    </div>
+    <div class="col">
+        <select id="emissionType">
+            <option value="310038, 262376, 247421, 389055, 98673">2020</option>
+            <option value="284576, 276303, 220975, 570176, 75400">2019</option>
+            <option value="278212, 256112, 187021, 534450, 76344">2018</option>
+            <option value="266707, 262254, 192343, 498407, 71001">2017</option>
+            <option value="179003, 257854, 439645, 466982, 299083">2016</option>
+            <option value="179003, 264951, 451745, 466982, 235388">2015</option>
+            <option value="152336, 288606, 397489, 440950, 193397">2014</option>
+            <option value="147446, 279688, 409532, 440949, 208264">2013</option>
+        </select>
+    </div>
+</div>
+<div id="polarArea">
+    <canvas id="emissionPolarAreaChart" style="height: 700px;"></canvas>
+</div></div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/map_constants.js"></script>
+    <script src="assets/js/recyclingData.js"></script>
+    <script src="assets/js/parik_data.js"></script>
+    <script src="assets/js/doughnut_chart.js"></script>
+    <script src="assets/js/overviewMap.js"></script>
+    <script src="assets/js/polarAreaChart.js"></script>
+    <script src="assets/js/recyclingLineChart.js"></script>
+    <script src="assets/js/wasteStackedLineChart.js"></script>
+    <script src="assets/js/wasteBarChart.js"></script>
+    <script src="assets/js/energyMap.js"></script>
+</body>
+
+</html>
